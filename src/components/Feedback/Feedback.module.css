@@ -1,0 +1,6 @@
+.feedback_text {
+  font-size: 18px;
+}
+.feedback_text + .feedback_text {
+  margin-top: 10px;
+}

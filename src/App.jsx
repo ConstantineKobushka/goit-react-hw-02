@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import Description from './components/Description/Description';
+import Options from './components/Options/Options';
+import Feedback from './components/Feedback/Feedback';
+import Notification from './components/Notification/Notification';
 
 function App() {
-  const [count, setCount] = useState(0)
+  function initialFeedback() {
+    const feedbackFromLocalStorage = localStorage.getItem('feedbackData');
+    return feedbackFromLocalStorage ? JSON.parse(feedbackFromLocalStorage) : { good: 0, neutral: 0, bad: 0 }; // Можно задать дефолтное состояние
+  }
+
+  const [feedback, setFeedback] = useState(initialFeedback());
+
+  useEffect(() => {
+    localStorage.setItem('feedbackData', JSON.stringify(feedback));
+  }, [feedback]);
+
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+
+  function updateFeedback(feedbackType) {
+    setFeedback((prevFeedback) => ({ ...prevFeedback, [feedbackType]: prevFeedback[feedbackType] + 1 }));
+  }
+
+  function resetFeedback() {
+    setFeedback({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Description />
+      <Options onUpdateFeedback={updateFeedback} onResetFeedback={resetFeedback} totalFeedback={totalFeedback} />
+      {totalFeedback > 0 && (
+        <Feedback good={feedback.good} neutral={feedback.neutral} bad={feedback.bad} total={totalFeedback} />
+      )}
+      {totalFeedback === 0 && <Notification />}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
