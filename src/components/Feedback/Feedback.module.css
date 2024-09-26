@@ -1,4 +1,5 @@
 .feedback_text {
+  margin-left: 25px;
   font-size: 18px;
 }
 .feedback_text + .feedback_text {

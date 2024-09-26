@@ -1,8 +1,11 @@
 .description_title {
+  margin-top: 25px;
+  margin-left: 25px;
   margin-bottom: 30px;
   font-size: 38px;
 }
 .description_text {
   font-size: 24px;
+  margin-left: 25px;
   margin-bottom: 20px;
 }
