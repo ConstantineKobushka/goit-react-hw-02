@@ -3,7 +3,6 @@ import styles from './Options.module.css';
 const Options = ({ onUpdateFeedback, onResetFeedback, totalFeedback }) => {
   function getTypeFeedback(event) {
     let typeOfFeedback = event.currentTarget.textContent.toLowerCase();
-    event.current;
     onUpdateFeedback(typeOfFeedback);
   }
   return (
