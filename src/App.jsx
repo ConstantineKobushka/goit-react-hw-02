@@ -7,7 +7,7 @@ import Notification from './components/Notification/Notification';
 function App() {
   function initialFeedback() {
     const feedbackFromLocalStorage = localStorage.getItem('feedbackData');
-    return feedbackFromLocalStorage ? JSON.parse(feedbackFromLocalStorage) : { good: 0, neutral: 0, bad: 0 }; // Можно задать дефолтное состояние
+    return feedbackFromLocalStorage ? JSON.parse(feedbackFromLocalStorage) : { good: 0, neutral: 0, bad: 0 };
   }
 
   const [feedback, setFeedback] = useState(initialFeedback());
