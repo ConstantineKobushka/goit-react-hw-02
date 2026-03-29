@@ -1,7 +1,7 @@
-.feedback_text {
+.text {
   margin-left: 25px;
   font-size: 18px;
 }
-.feedback_text + .feedback_text {
+.text + .text {
   margin-top: 10px;
 }

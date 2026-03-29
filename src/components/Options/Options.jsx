@@ -1,27 +1,35 @@
 import styles from './Options.module.css';
 
-const Options = ({ onUpdateFeedback, onResetFeedback, totalFeedback }) => {
-  function getTypeFeedback(event) {
-    let typeOfFeedback = event.currentTarget.textContent.toLowerCase();
-    onUpdateFeedback(typeOfFeedback);
-  }
+const Options = ({ updateFeedback, totalFeedback, resetFeedback }) => {
   return (
-    <>
-      <button className={styles.options_btn} onClick={getTypeFeedback} type='button'>
+    <div className={styles.wrapper}>
+      <button
+        className={styles.btn}
+        type="button"
+        onClick={() => updateFeedback('good')}
+      >
         Good
       </button>
-      <button className={styles.options_btn} onClick={getTypeFeedback} type='button'>
+      <button
+        className={styles.btn}
+        type="button"
+        onClick={() => updateFeedback('neutral')}
+      >
         Neutral
       </button>
-      <button className={styles.options_btn} onClick={getTypeFeedback} type='button'>
+      <button
+        className={styles.btn}
+        type="button"
+        onClick={() => updateFeedback('bad')}
+      >
         Bad
       </button>
       {totalFeedback > 0 && (
-        <button className={styles.options_btn} onClick={onResetFeedback} type='button'>
+        <button className={styles.btn} type="button" onClick={resetFeedback}>
           Reset
         </button>
       )}
-    </>
+    </div>
   );
 };
 
